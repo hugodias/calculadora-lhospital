@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+<head>
+	<meta charset="UTF-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Calculo de L'hospital</title>
+	<meta name="description" content="Minimal Form Interface: Simplistic, single input view form" />
+	<meta name="keywords" content="form, minimal, interface, single input, big form, responsive form, transition" />
+	<meta name="author" content="Codrops" />
+	<link rel="shortcut icon" href="../favicon.ico">
+	<link rel="stylesheet" type="text/css" href="css/app.css" />
+	<script src="js/lib/modernizr.custom.js"></script>
+</head>
+<body>
+	<div class="container">
+		<header class="codrops-header">
+			<h1>Calculo de limites <span>Utilizando l'hospital</span></h1>
+		</header>
+		<section>
+			<form id="theForm" class="simform" autocomplete="off">
+				<div class="simform-inner">
+					<ol class="questions">
+						<li>
+							<span><label for="nominador">Digite a expressão do nominador</label></span>
+							<input id="nominador" name="nominador" type="text"/>
+						</li>
+						<li>
+							<span><label for="denominador">Digite a expressão do denominador</label></span>
+							<input id="denominador" name="denominador" type="text"/>
+						</li>
+						<li>
+							<span><label for="x">Digite o valor de X</label></span>
+							<input id="x" name="x" type="text"/>
+						</li>
+					</ol><!-- /questions -->
+					<button class="submit" type="submit">Calcular</button>
+					<div class="controls">
+						<button class="next"></button>
+						<div class="progress"></div>
+						<span class="number">
+							<span class="number-current"></span>
+							<span class="number-total"></span>
+						</span>
+						<span class="error-message"></span>
+					</div><!-- / controls -->
+				</div><!-- /simform-inner -->
+				<span class="final-message"></span>
+			</form><!-- /simform -->
+			<div class="helper">
+				<div class="left">
+					<h2>Como funciona</h2>
+					<p>
+						<i>A sintaxe deve seguir o padrão do formulário ao lado</i><br/>
+						<ul>
+							<li>1. Informar o nominador da expressão</li>
+							<li>2. Informar o denominador da expressão</li>
+							<li>3. Informar o valor de X (x tende à...)</li>
+						</ul>
+					</p>
+				</div>
+				<div class="right">
+					<h2>Exemplo de expressão</h2>
+					<p>Denominador: <code>20-(x^2)+2x^3</code><br/>
+						Nominador: <code>-x^4+2x+20</code><br/>
+						x: <code>-2</code>
+					</p>
+				</div>
+				<div class="clearfix"></div>
+			</div>
+		</section>
+	</div><!-- /container -->
+	<script src="js/lib/jquery.min.js"></script>
+	<script src="js/lib/nerdamer.core.js"></script>
+	<script src="js/lib/Algebra.js"></script>
+	<script src="js/lib/Calculus.js"></script>
+	<script src="js/lib/classie.js"></script>
+	<script src="js/lib/stepsForm.js"></script>
+	<script src="js/app.js"></script>
+</body>
+</html>

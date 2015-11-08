@@ -1,0 +1,35 @@
+@import "normalize";
+@import "component";
+@import "demo";
+
+.simform{
+  padding-top: 0;
+}
+code{
+  background: darken(#2dcb89,10);
+  padding: 0 10px;
+}
+
+.helper{
+  background: darken(#2dcb89,5);
+  color: #FFF;
+  padding: 30px;
+  max-width: 870px;
+  margin: 0 auto;
+  .left{
+    text-align: left;
+    float: left;
+    max-width: 60%;
+  }
+  .right{
+    float: right;
+    max-width: 40%;
+  }
+  ul{
+    padding: 0;
+    text-align: left;
+    li{
+      list-style: none;
+    }
+  }
+}
