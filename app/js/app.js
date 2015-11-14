@@ -1,19 +1,50 @@
 var theForm = document.getElementById( 'theForm' );
 
-function calculate(numerador, denominador, x_val) {
-  var num_derivada = nerdamer('diff('+numerador+')');
-  var den_derivada = nerdamer('diff('+denominador+')');
+/**
+* Verifica se o numerador e o denominador sao iguals a 0
+*/
+function lhospitalValida(numerador, denominador){
+  return (parseInt(numerador) === 0 && parseInt(denominador) === 0);
+}
 
-  var num_derivada_resolvido = num_derivada.evaluate({x: x_val}).text();
-  var den_derivada_resolvido = den_derivada.evaluate({x: x_val}).text();
+/**
+* Faz a derivada de uma expressao
+*/
+function derivada(expressao){
+  return nerdamer('diff('+expressao+')');
+}
 
-  if(num_derivada_resolvido === 0 && den_derivada_resolvido === 0) {
-    return calculate(num_derivada.text(), den_derivada.text(), x_val);
+/**
+* Deriva uma expressao e Substitui o X pelo valor
+* informado
+*/
+function derivaESubstitui(expressao, x_val) {
+  return derivada(expressao).evaluate({x: x_val}).text();
+}
+
+
+function calcular(numerador, denominador, x_val) {
+  var Numerador_derivado = derivaESubstitui(numerador, x_val);
+  var Denominador_derivado = derivaESubstitui(denominador, x_val);
+
+  if(lhospitalValida(Numerador_derivado, Denominador_derivado)){
+
+    alert('Este exemplo so calcula lhospital 1x. Ainda não e possivel fazer derivadas sucessivas');
+
   } else {
+    // Retorna o resultado encontrado
     return {
-      numerador: num_derivada_resolvido,
-      denominador: den_derivada_resolvido,
-      resultado: nerdamer(num_derivada_resolvido + '/' + den_derivada_resolvido).evaluate().text()
+      x: x_val,
+      // Informacoes do numerador
+      numerador: numerador,
+      numerador_derivada: derivada(numerador).text(),
+      numerador_resolvido: Numerador_derivado,
+      // Informacoes do denominador
+      denominador: denominador,
+      denominador_derivada: derivada(denominador).text(),
+      denominador_resolvido: Denominador_derivado,
+      // Resultado
+      resultado: nerdamer(Numerador_derivado + '/' + Denominador_derivado).evaluate().text()
     };
   }
 }
@@ -21,38 +52,28 @@ function calculate(numerador, denominador, x_val) {
 
 new stepsForm( theForm, {
   onSubmit : function( form ) {
-    // let's just simulate something...
+    var template = $('#resultado').html();
     var messageEl = theForm.querySelector( '.final-message' );
-
-    // hide form
-    classie.addClass( theForm.querySelector( '.simform-inner' ), 'hide' );
-
     var data = $('#theForm').serializeArray();
-
     var valor_x = data[2].value;
-
-    // 20-(x^2)+2x^3
     var numerador = nerdamer(data[0].value).evaluate({x: valor_x});
-
-    // -x^4+2x+20
     var denominador = nerdamer(data[1].value).evaluate({x: valor_x});
 
+    Mustache.parse(template);
+
+    // Esconde o formulario
+    classie.addClass( theForm.querySelector( '.simform-inner' ), 'hide' );
+
     // Verifica se ambos numerador e denominador sao iguals a 0
-    if(parseInt(numerador.text()) === 0 && parseInt(denominador.text()) === 0){
-      var resultado = calculate(data[0].value, data[1].value, data[2].value);
+    if(lhospitalValida(numerador.text(), denominador.text())){
+      var rendered = Mustache.render(template,calcular(data[0].value, data[1].value, data[2].value));
 
-      var r = '';
-      r += 'Problema RESOLVIDO!<br/>';
-      r += 'Deriavada do numerador: ' + resultado.numerador + '<br/>';
-      r += 'Deriavada do denominador: ' + resultado.denominador + '<br/>';
-      r += 'Resultado final: ' + resultado.resultado;
-
-      messageEl.innerHTML = r;
+      $('.final-message').html(rendered);
     } else {
       // Nao e uma expressao valida para resolver com lhospital
-      messageEl.innerHTML = 'Esta expressão nao resultou em 0/0 e não pode ser resolvida por lhospital.';
+      messageEl.innerHTML = 'Esta expressão nao resultou em 0/0 e não pode ser resolvida por L\'\hospital.';
     }
-
+    // Mostra a caixa de resultado
     classie.addClass( messageEl, 'show' );
 
   }

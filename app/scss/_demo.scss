@@ -32,20 +32,20 @@ a:hover, a:focus {
 	color: rgba(0,0,0,0.6);
 }
 
-.codrops-header {
+.header {
 	margin: 0 auto;
 	padding: 3em 1em;
 	text-align: center;
 	color: rgba(0,0,0,0.35);
 }
 
-.codrops-header h1 {
+.header h1 {
 	margin: 0;
 	font-weight: 400;
 	font-size: 2.5em;
 }
 
-.codrops-header h1 span {
+.header h1 span {
 	display: block;
 	padding: 0 0 0.6em 0.1em;
 	font-size: 0.6em;
@@ -151,7 +151,7 @@ section.related {
 }
 
 @media screen and (max-width: 25em) {
-	.codrops-header { font-size: 0.8em; }
+	.header { font-size: 0.8em; }
 	section.related { font-size: 1.2em; }
 	.codrops-icon span { display: none; }
 }

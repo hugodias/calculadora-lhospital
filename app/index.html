@@ -5,48 +5,15 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Calculo de L'hospital</title>
-	<meta name="description" content="Minimal Form Interface: Simplistic, single input view form" />
-	<meta name="keywords" content="form, minimal, interface, single input, big form, responsive form, transition" />
-	<meta name="author" content="Codrops" />
+	<meta name="author" content="Hugo Victor Dias Teodoro" />
 	<link rel="shortcut icon" href="../favicon.ico">
 	<link rel="stylesheet" type="text/css" href="css/app.css" />
 	<script src="js/lib/modernizr.custom.js"></script>
 </head>
 <body>
 	<div class="container">
-		<header class="codrops-header">
-			<h1>Calculo de limites <span>Utilizando l'hospital</span></h1>
-		</header>
-		<section>
-			<form id="theForm" class="simform" autocomplete="off">
-				<div class="simform-inner">
-					<ol class="questions">
-						<li>
-							<span><label for="nominador">Digite a expressão do nominador</label></span>
-							<input id="nominador" name="nominador" type="text"/>
-						</li>
-						<li>
-							<span><label for="denominador">Digite a expressão do denominador</label></span>
-							<input id="denominador" name="denominador" type="text"/>
-						</li>
-						<li>
-							<span><label for="x">Digite o valor de X</label></span>
-							<input id="x" name="x" type="text"/>
-						</li>
-					</ol><!-- /questions -->
-					<button class="submit" type="submit">Calcular</button>
-					<div class="controls">
-						<button class="next"></button>
-						<div class="progress"></div>
-						<span class="number">
-							<span class="number-current"></span>
-							<span class="number-total"></span>
-						</span>
-						<span class="error-message"></span>
-					</div><!-- / controls -->
-				</div><!-- /simform-inner -->
-				<span class="final-message"></span>
-			</form><!-- /simform -->
+		<header class="header">
+			<h1>Calculo de limites <span>Utilizando l'hospital<br/><hr/>Hugo Victor Dias Teodoro</span></h1>
 			<div class="helper">
 				<div class="left">
 					<h2>Como funciona</h2>
@@ -68,9 +35,85 @@
 				</div>
 				<div class="clearfix"></div>
 			</div>
+			<div class="clearfix"></div>
+		</header>
+		<section>
+			<form id="theForm" class="simform" autocomplete="off">
+				<div class="simform-inner">
+					<ol class="questions">
+						<li>
+							<span>
+								<label for="nominador">
+									Digite a expressão do numerador
+									<small>Exemplo: 20-(x^2)+2x^3</small>
+								</label>
+
+							</span>
+							<input id="nominador" name="nominador" type="text"/>
+						</li>
+						<li>
+							<span>
+								<label for="denominador">
+									Digite a expressão do denominador
+									<small>Exemplo: -x^4+2x+20</small>
+								</label>
+							</span>
+							<input id="denominador" name="denominador" type="text"/>
+						</li>
+						<li>
+							<span>
+								<label for="x">
+									Digite o valor de X
+									<small>Exemplo: -2</small>
+								</label>
+
+							</span>
+							<input id="x" name="x" type="text"/>
+						</li>
+					</ol>
+					<button class="submit" type="submit">Calcular</button>
+					<div class="controls">
+						<button class="next"></button>
+						<div class="progress"></div>
+						<span class="number">
+							<span class="number-current"></span>
+							<span class="number-total"></span>
+						</span>
+						<span class="error-message"></span>
+					</div>
+				</div>
+				<div class="final-message"></div>
+			</form>
 		</section>
-	</div><!-- /container -->
+	</div>
+
+	<script id="resultado" type="x-tmpl-mustache">
+		<div class="resultado">
+			<div class="left">
+				<h2>Resultado</h2>
+				<div class="box">
+					{{numerador_resolvido}}
+					<div class="line"></div>
+					{{denominador_resolvido}}
+				</div>
+			</div>
+			<div class="right">
+				<h2>Passo a Passo</h2>
+				<ul class="numerador">
+					<li><strong>Numerador: </strong>{{numerador}}</li>
+					<li><strong>Derivada: </strong>{{numerador_derivada}}</li>
+					<li><strong>F({{x}}): </strong>{{numerador_resolvido}}</li>
+				</ul>
+				<ul>
+					<li><strong>Denominador: </strong>{{denominador}}</li>
+					<li><strong>Derivada: </strong>{{denominador_derivada}}</li>
+					<li><strong>F({{x}}): </strong>{{denominador_resolvido}}</li>
+				</ul>
+			</div>
+		</div>
+	</script>
 	<script src="js/lib/jquery.min.js"></script>
+	<script src="js/lib/mustache.min.js"></script>
 	<script src="js/lib/nerdamer.core.js"></script>
 	<script src="js/lib/Algebra.js"></script>
 	<script src="js/lib/Calculus.js"></script>
