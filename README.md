@@ -1,4 +1,4 @@
-## Calculadora L'hospital
+## Calculadora L'Hôpital
 
 Este app foi feito para um trabalho academico do curso de ciência da computação a fins de aplicar alguma área do calculo utilizando o desenvolvimento de software.
 
