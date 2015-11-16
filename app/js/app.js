@@ -56,8 +56,14 @@ new stepsForm( theForm, {
     var messageEl = theForm.querySelector( '.final-message' );
     var data = $('#theForm').serializeArray();
     var valor_x = data[2].value;
-    var numerador = nerdamer(data[0].value).evaluate({x: valor_x});
-    var denominador = nerdamer(data[1].value).evaluate({x: valor_x});
+
+    try{
+      var numerador = nerdamer(data[0].value).evaluate({x: valor_x});
+      var denominador = nerdamer(data[1].value).evaluate({x: valor_x});
+    } catch(err) {
+      alert('Expressão não suportada');
+      window.location.reload();
+    }
 
     Mustache.parse(template);
 
@@ -71,7 +77,7 @@ new stepsForm( theForm, {
       $('.final-message').html(rendered);
     } else {
       // Nao e uma expressao valida para resolver com L'Hôpital
-      messageEl.innerHTML = 'Esta expressão nao resultou em 0/0 e não pode ser resolvida por L\'\hôpital.';
+      messageEl.innerHTML = 'Esta expressão nao resultou em 0/0 e não pode ser resolvida por L\'\hôpital. <a href="" class="btn">Calcular novamente</a>';
     }
     // Mostra a caixa de resultado
     classie.addClass( messageEl, 'show' );

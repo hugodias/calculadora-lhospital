@@ -571,7 +571,9 @@ body {
   background: #303F9F; }
 
 section {
-  background: #3F51B5; }
+  background: #3F51B5;
+  min-height: 600px;
+  padding-top: 140px; }
 
 .simform {
   padding-top: 0; }
@@ -679,3 +681,16 @@ header {
 
 .hide {
   display: none; }
+
+a.btn {
+  border: 3px solid #FFFFFF;
+  padding: 10px 10px;
+  clear: both;
+  float: none;
+  display: block;
+  margin-top: 30px;
+  color: #FFFFFF;
+  font-size: 20px;
+  max-width: 400px;
+  margin: 0 auto;
+  margin-top: 40px; }
